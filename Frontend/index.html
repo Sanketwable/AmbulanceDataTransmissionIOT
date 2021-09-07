@@ -5,23 +5,49 @@
 window.onload = function() {
 
 var dataPoints = [];
+var dataPoints1 = [];
 
 var chart = new CanvasJS.Chart("hearRateMonitor", {
+
 	theme: "dark1",
 	title: {
 		text: "HeartBeat Data"
 	},
+    axisY: { 
+		title: "Rate",
+		suffix: " bpm"
+	},
+    axisX: { 
+		title: "Time",
+		suffix: " sec"
+	},
 	data: [{
-		type: "pie",
-		dataPoints: dataPoints
+		type: "line",
+		dataPoints: dataPoints,
 	}]
 });
 updateData();
+
+var chart1 = new CanvasJS.Chart("bloodPressureMonitor", {
+	theme: "light",
+	title: {
+		text: "BloodPressure Data"
+	},
+	data: [{
+		type: "line",
+		dataPoints: dataPoints1
+	}]
+});
+updateData1();
 
 // Initial Values
 var xValue = 0;
 var yValue = 10;
 var newDataCount = 6;
+
+var xValue1 = 0;
+var yValue1 = 10;
+var newDataCount1 = 6;
 
 function addData(data) {
 	if(newDataCount != 1) {
@@ -38,13 +64,41 @@ function addData(data) {
 	}
 	
 	newDataCount = 1;
+    var dataLength = 20;
+    if (dataPoints.length > dataLength) {
+		dataPoints.shift();
+	}
 	chart.render();
+    
 	setTimeout(updateData, 1500);
+}
+function addData1(data1) {
+	if(newDataCount1 != 1) {
+		$.each(data1, function(key, value) {
+			dataPoints1.push({x: value[0], y: parseInt(value[1])});
+			xValue1++;
+			yValue1 = parseInt(value[1]);
+		});
+	} else {
+		//dataPoints.shift();
+		dataPoints1.push({x: data1[0][0], y: parseInt(data1[0][1])});
+		xValue1++;
+		yValue1 = parseInt(data1[0][1]);
+	}
+	var dataLength = 10;
+	newDataCount1 = 1;
+    if (dataPoints1.length > dataLength) {
+		dataPoints1.shift();
+	}
+	chart1.render();
+	setTimeout(updateData1, 1000);
 }
 
 function updateData() {
-	// $.getJSON("https://canvasjs.com/services/data/datapoints.php?xstart="+xValue+"&ystart="+yValue+"&length="+newDataCount+"type=json", addData);
     $.getJSON("http://localhost:8080/heartrate?xstart="+xValue, addData);
+}
+function updateData1() {
+    $.getJSON("http://localhost:8080/bloodpressure?xstart="+xValue1, addData1);
 }
 
 }
@@ -52,6 +106,7 @@ function updateData() {
 </head>
 <body>
 <div id="hearRateMonitor" style="height: 300px; width: 100%;"></div>
+<div id="bloodPressureMonitor" style="height: 300px; width: 100%;"></div>
 <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 </body>
