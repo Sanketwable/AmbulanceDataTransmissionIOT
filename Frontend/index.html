@@ -1,113 +1,33 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<script>
-window.onload = function() {
-
-var dataPoints = [];
-var dataPoints1 = [];
-
-var chart = new CanvasJS.Chart("hearRateMonitor", {
-
-	theme: "dark1",
-	title: {
-		text: "HeartBeat Data"
-	},
-    axisY: { 
-		title: "Rate",
-		suffix: " bpm"
-	},
-    axisX: { 
-		title: "Time",
-		suffix: " sec"
-	},
-	data: [{
-		type: "line",
-		dataPoints: dataPoints,
-	}]
-});
-updateData();
-
-var chart1 = new CanvasJS.Chart("bloodPressureMonitor", {
-	theme: "light",
-	title: {
-		text: "BloodPressure Data"
-	},
-	data: [{
-		type: "line",
-		dataPoints: dataPoints1
-	}]
-});
-updateData1();
-
-// Initial Values
-var xValue = 0;
-var yValue = 10;
-var newDataCount = 6;
-
-var xValue1 = 0;
-var yValue1 = 10;
-var newDataCount1 = 6;
-
-function addData(data) {
-	if(newDataCount != 1) {
-		$.each(data, function(key, value) {
-			dataPoints.push({x: value[0], y: parseInt(value[1])});
-			xValue++;
-			yValue = parseInt(value[1]);
-		});
-	} else {
-		//dataPoints.shift();
-		dataPoints.push({x: data[0][0], y: parseInt(data[0][1])});
-		xValue++;
-		yValue = parseInt(data[0][1]);
-	}
-	
-	newDataCount = 1;
-    var dataLength = 20;
-    if (dataPoints.length > dataLength) {
-		dataPoints.shift();
-	}
-	chart.render();
-    
-	setTimeout(updateData, 1500);
-}
-function addData1(data1) {
-	if(newDataCount1 != 1) {
-		$.each(data1, function(key, value) {
-			dataPoints1.push({x: value[0], y: parseInt(value[1])});
-			xValue1++;
-			yValue1 = parseInt(value[1]);
-		});
-	} else {
-		//dataPoints.shift();
-		dataPoints1.push({x: data1[0][0], y: parseInt(data1[0][1])});
-		xValue1++;
-		yValue1 = parseInt(data1[0][1]);
-	}
-	var dataLength = 10;
-	newDataCount1 = 1;
-    if (dataPoints1.length > dataLength) {
-		dataPoints1.shift();
-	}
-	chart1.render();
-	setTimeout(updateData1, 1000);
-}
-
-function updateData() {
-    $.getJSON("http://localhost:8080/heartrate?xstart="+xValue, addData);
-}
-function updateData1() {
-    $.getJSON("http://localhost:8080/bloodpressure?xstart="+xValue1, addData1);
-}
-
-}
-</script>
+<script src="./js/index.js"></script>
+<link rel="stylesheet" type="text/css" href="./css/style.css" />
 </head>
 <body>
+	<h1 style="text-align: center;" id="AmbulanceINFO">Ambulance 1 : MH01 A5003 </h1>
+	<br>
+	<label for="AmbulanceID">Choose an ambulance:</label>
+	<select id="Ambulance" onchange="SelectAmbulance()">
+        <option value="1">MH01 A5003</option>
+        <option value="2">MH06 G1463</option>
+        <option value="3">MH08 E0091</option>
+    </select>
+	<br>
+	<br>
+	<br>
 <div id="hearRateMonitor" style="height: 300px; width: 100%;"></div>
 <div id="bloodPressureMonitor" style="height: 300px; width: 100%;"></div>
+
+<h3>My Google Maps Demo</h3>
+<div id="map"></div>
+<script
+  src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=&v=weekly"
+  async
+></script>
+
 <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
 <script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
 </body>
 </html>
