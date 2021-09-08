@@ -1,6 +1,8 @@
 <!DOCTYPE HTML>
 <html>
 <head>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+
 <script src="./js/index.js"></script>
 <link rel="stylesheet" type="text/css" href="./css/style.css" />
 </head>
@@ -8,22 +10,35 @@
 	<h1 style="text-align: center;" id="AmbulanceINFO">Ambulance 1 : MH01 A5003 </h1>
 	<br>
 	<label for="AmbulanceID">Choose an ambulance:</label>
-	<select id="Ambulance" onchange="SelectAmbulance()">
+	<select style="width: 250px; float: right;" id="Ambulance" onchange="SelectAmbulance()">
         <option value="1">MH01 A5003</option>
         <option value="2">MH06 G1463</option>
         <option value="3">MH08 E0091</option>
     </select>
+	<div class="google_map">
+		<p style="font-size: xx-large;" id="spo2info">SpO2 : 95</p>
+  	</div>
+  <div class="paragraph">
+		<p ></p>
+  </div>
+  <div class="clearfix">
+	  <p></p>
+  </div>
 	<br>
 	<br>
 	<br>
-<div id="hearRateMonitor" style="height: 300px; width: 100%;"></div>
+<div id="heartRateMonitor" style="height: 300px; width: 100%;"></div>
+<br>
+<br>
 <div id="bloodPressureMonitor" style="height: 300px; width: 100%;"></div>
-
-<h3>My Google Maps Demo</h3>
+<br>
+<br>
+<h3>Live Location of Ambulance</h3>
 <div id="map"></div>
+<br>
 <script
-  src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap&libraries=&v=weekly"
-  async
+src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCd9bdKJ1FOZrydzwm9sX-KSyeBdFGQR-4&callback=initMap&libraries=&v=weekly"
+async
 ></script>
 
 <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>

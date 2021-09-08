@@ -3,19 +3,51 @@ const AmbulanceInfo = new Map();
 AmbulanceInfo.set(1, "MH01 A5003")
 AmbulanceInfo.set(2, "MH06 G1463")
 AmbulanceInfo.set(3, "MH08 E0091")
+var spo2Info = 95;
 var selectedAmbulance = 1;
+var originLatitude =  19.106207;
+var originLongitude = 74.621587;
+var destinationLatitude = 19.1178 
+var destinationLongitude = 74.7300
 
-// Function to show MAP
+// updateAmbulanceLocation();
+
 function initMap() {
-    const uluru = { lat: -25.344, lng: 131.036 };
+    console.log(originLatitude)
+    console.log(originLongitude)
+    const directionsRenderer = new google.maps.DirectionsRenderer();
+    const directionsService = new google.maps.DirectionsService();
     const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 7,
-      center: uluru,
+      zoom: 14,
+      center: { lat: originLatitude, lng: originLatitude },
     });
-    const marker = new google.maps.Marker({
-      position: uluru,
-      map: map,
-    });
+    directionsRenderer.setMap(map);
+    calculateAndDisplayRoute(directionsService, directionsRenderer);
+}
+  
+  function calculateAndDisplayRoute(directionsService, directionsRenderer) {
+    // const selectedMode = document.getElementById("mode").value;
+    directionsService
+      .route({
+        origin: { lat: originLatitude, lng: originLongitude },
+        destination: { lat: 19.1178, lng: 74.7300 },
+        travelMode: google.maps.TravelMode["DRIVING"],
+      })
+      .then((response) => {
+        directionsRenderer.setDirections(response);
+      })
+      .catch((e) => window.alert("Directions request failed due to " + status));
+}
+
+function addLocationData(data3) {
+    console.log(data3[0][0]);
+    console.log(data3[0][1]);
+    originLatitude =  data3[0][0];
+    originLongitude = data3[0][1];
+}
+
+function updateAmbulanceLocation(amb) {
+    $.getJSON("http://localhost:8080/location?ambulanceID="+amb, addLocationData);
 }
 
 // SelectAmbulance is selecting ambulance from drop down
@@ -23,6 +55,10 @@ function SelectAmbulance() {
     var e = document.getElementById("Ambulance");
     var selectedAmbulance = e.options[e.selectedIndex].value;
 	document.getElementById("AmbulanceINFO").innerHTML = "Ambulance " + selectedAmbulance + " : " +AmbulanceInfo.get(parseInt(selectedAmbulance));
+    console.log(originLatitude)
+    console.log(originLongitude)
+    setTimeout(() => {  updateAmbulanceLocation(selectedAmbulance); }, 1000);;
+    setTimeout(() => {  initMap(); }, 2000);
 }
 
 window.onload = function() {
@@ -34,7 +70,7 @@ window.onload = function() {
     var diastolicBP = [];
     var avgdiastolicBP = [];
 
-    var heartRateChart = new CanvasJS.Chart("hearRateMonitor", {
+    var heartRateChart = new CanvasJS.Chart("heartRateMonitor", {
 
 	    theme: "light2",
 	    animationEnabled: true,
@@ -131,8 +167,9 @@ window.onload = function() {
 	    }]
     });
     updateBloodPressureData();
+    updateSpO2();
 
-// Initial Values
+    // Initial Values
     var xValueHR = 0;
     var yValue = 10;
     var newDataCount = 6;
@@ -195,13 +232,24 @@ window.onload = function() {
 	    }
 	    bloodpressureChart.render();
 	    setTimeout(updateBloodPressureData, 2000);
-}
+    }
+    function addspo2Data(data2) {
+		spo2Info =  data2[0][0];
+	    setTimeout(updateSpO2, 10000);
+        document.getElementById("spo2info").innerHTML = "SpO2 : " + spo2Info;
+    }
 
-function updateHeartRateData() {
-    $.getJSON("http://localhost:8080/heartrate?xstart="+xValueHR+"&ambulanceID="+selectedAmbulance, addHeartRateData);
-}
-function updateBloodPressureData() {
-    $.getJSON("http://localhost:8080/bloodpressure?xstart="+xValueBP+"&ambulanceID="+selectedAmbulance, addBloodPressureData);
-}
+    function updateHeartRateData() {
+        $.getJSON("http://localhost:8080/heartrate?xstart="+xValueHR+"&ambulanceID="+selectedAmbulance, addHeartRateData);
+    }
+    function updateBloodPressureData() {
+        $.getJSON("http://localhost:8080/bloodpressure?xstart="+xValueBP+"&ambulanceID="+selectedAmbulance, addBloodPressureData);
+    }
+    function updateSpO2() {
+        $.getJSON("http://localhost:8080/spo2?ambulanceID="+selectedAmbulance, addspo2Data);
+    }
 
-}
+
+}   
+
+

@@ -1,7 +1,28 @@
-/* Set the size of the div element that contains the map */
 #map {
-    height: 400px;
-    /* The height is 400 pixels */
+    height: 80%;
     width: 100%;
-    /* The width is the width of the web page */
-  }
+    align-self: center;
+    border-bottom: 4cm;
+}
+html,
+body {
+    height: 65%;
+    margin: 800;
+    padding: 900;
+}
+.google_map{
+    width:30%;
+    /* margin-right:2%; */
+    float: left;
+}
+/* .google_map iframe{
+   width:0%;
+   height: 0%;
+} */
+.paragraph {
+    width:42%;
+    float: left;
+}
+.clearfix{
+    clear:both
+}
