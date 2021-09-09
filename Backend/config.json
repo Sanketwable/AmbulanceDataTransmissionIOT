@@ -1,0 +1,37 @@
+{
+ "Ambulance": [
+  {
+   "id": 1,
+   "location": {
+    "latitude": 19.106207,
+    "longitude": 74.621587
+   },
+   "heart_rate": 5,
+   "sys_bp": 50,
+   "dia_bp": 60,
+   "spo2": 900
+  },
+  {
+   "id": 2,
+   "location": {
+    "latitude": 19.126207,
+    "longitude": 74.821587
+   },
+   "heart_rate": 43,
+   "sys_bp": 590,
+   "dia_bp": 609,
+   "spo2": 12
+  },
+  {
+   "id": 3,
+   "location": {
+    "latitude": 19.176207,
+    "longitude": 74.921587
+   },
+   "heart_rate": 43,
+   "sys_bp": 590,
+   "dia_bp": 609,
+   "spo2": 12
+  }
+ ]
+}

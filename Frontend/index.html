@@ -7,35 +7,23 @@
 <script src="./js/index.js"></script>
 <link rel="stylesheet" type="text/css" href="./css/style.css" />
 </head>
-<body>
+<body style="background-color:white;">
 
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 		<div class="container-fluid">
-		  <a class="navbar-brand" href="#">Navbar</a>
+		  <a class="navbar-brand" href="#">Asian Hospital</a>
 		  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		  </button>
 		  <div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 			  <li class="nav-item">
-				<a class="nav-link active" aria-current="page" href="#">Home</a>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link" href="#">Link</a>
-			  </li>
-			  <li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-				  Dropdown
-				</a>
-				<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-				  <li><a class="dropdown-item" href="#">Action</a></li>
-				  <li><a class="dropdown-item" href="#">Another action</a></li>
-				  <li><hr class="dropdown-divider"></li>
-				  <li><a class="dropdown-item" href="#">Something else here</a></li>
-				</ul>
-			  </li>
-			  <li class="nav-item">
-				<a class="nav-link disabled">Disabled</a>
+				<label for="AmbulanceID">Choose an ambulance:</label>
+				<select style="width: 250px; " id="Ambulance" onchange="SelectAmbulance()">
+					<option value="1">MH01 A5003</option>
+					<option value="2">MH06 G1463</option>
+					<option value="3">MH08 E0091</option>
+				</select>
 			  </li>
 			</ul>
 			<form class="d-flex">
@@ -46,34 +34,21 @@
 		</div>
 	  </nav>
 
-	<h1 style="text-align: center;" id="AmbulanceINFO">Ambulance 1 : MH01 A5003 </h1>
+	<h1 style="text-align: center; padding: 5mm;" id="AmbulanceINFO">Ambulance 1 : MH01 A5003 </h1>
 	<br>
-	<label for="AmbulanceID">Choose an ambulance:</label>
-	<select style="width: 250px; float: right;" id="Ambulance" onchange="SelectAmbulance()">
-        <option value="1">MH01 A5003</option>
-        <option value="2">MH06 G1463</option>
-        <option value="3">MH08 E0091</option>
-    </select>
-	<div class="google_map">
-		<p style="font-size: xx-large;" id="spo2info">SpO2 : 95</p>
+	<div class="spo2">
+		<p style="font-size: xx-large;" id="spo2info"> &nbsp SpO2 : 95</p>
   	</div>
-  <div class="paragraph">
-		<p ></p>
   </div>
-  <div class="clearfix">
-	  <p></p>
-  </div>
-	<br>
-	<br>
-	<br>
-<div id="heartRateMonitor" style="height: 300px; width: 100%;"></div>
+<div id="heartRateMonitor" style="height: 100%; width: 95%; padding-left: 1cm; padding-right: 1cm; padding-top: 1cm;"></div>
 <br>
 <br>
-<div id="bloodPressureMonitor" style="height: 300px; width: 100%;"></div>
+<div id="bloodPressureMonitor" style="height: 100%; width: 95%; padding-left: 1cm; padding-right: 1cm; padding-top: 1cm;"></div>
 <br>
 <br>
-<h3>Live Location of Ambulance</h3>
+<h3 style="padding: 5mm;">&nbsp Live Location of Ambulance</h3>
 <div id="map"></div>
+
 <br>
 <script
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCd9bdKJ1FOZrydzwm9sX-KSyeBdFGQR-4&callback=initMap&libraries=&v=weekly"

@@ -1,8 +1,5 @@
 #map {
     height: 80%;
-    width: 100%;
-    align-self: center;
-    border-bottom: 4cm;
 }
 html,
 body {
@@ -10,19 +7,7 @@ body {
     margin: 800;
     padding: 900;
 }
-.google_map{
+.spo2{
     width:30%;
-    /* margin-right:2%; */
-    float: left;
-}
-/* .google_map iframe{
-   width:0%;
-   height: 0%;
-} */
-.paragraph {
-    width:42%;
-    float: left;
-}
-.clearfix{
-    clear:both
+    /* float: left; */
 }
