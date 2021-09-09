@@ -6,9 +6,12 @@ import (
 	"io/ioutil"
 	"net/http"
 	"os"
+	"time"
 )
 
 var Data Ambulances
+var Status int = -1
+
 
 type Ambulance struct {
 	ID        int      `json:"id"`
@@ -27,6 +30,9 @@ type Ambulances struct {
 }
 
 func Init() {
+	if Status == -1 {
+		go OnlinefortwoSec()
+	}
 	jsonFile, err := os.Open("config.json")
 	if err != nil {
 		fmt.Println(err)
@@ -34,10 +40,12 @@ func Init() {
 	defer jsonFile.Close()
 	byteValue, _ := ioutil.ReadAll(jsonFile)
 	json.Unmarshal(byteValue, &Data)
-	fmt.Println(Data.Ambulance[0].Location.Latitude)
 }
 
 func UpdatedataHandler(w http.ResponseWriter, r *http.Request) {
+	if Status == -1 {
+		go OnlinefortwoSec()
+	}
 	ambulance := Ambulance{}
 
 	body, err := ioutil.ReadAll(r.Body)
@@ -68,4 +76,22 @@ func WriteToConfig() {
 	file, _ := json.MarshalIndent(Data, "", " ")
 	_ = ioutil.WriteFile("config.json", file, 0644)
 	Init()
+}
+
+func OnlinefortwoSec() {
+	Status = 1;
+	time.Sleep(11*time.Second)
+	Status = -1
+}
+
+func StatusHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Add("Content-Type", "application/json; charset=utf-8")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	w.Header().Set("Access-Control-Allow-Methods", "GET")
+	if Status == 1 {
+		w.WriteHeader(http.StatusCreated)
+	} else {
+		w.WriteHeader(http.StatusOK)
+	}
+
 }

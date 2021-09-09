@@ -28,8 +28,14 @@ function handleErrors(response) {
         throw Error(response.statusText);
     }
 	else {
-		document.getElementById("statusChecker").style.backgroundColor = "green";
-		document.getElementById("statusChecker").innerHTML = "ONLINE";
+		if (response.status == 201) {
+			document.getElementById("statusChecker").style.backgroundColor = "green";
+			document.getElementById("statusChecker").innerHTML = "ONLINE";
+		} else {
+			document.getElementById("statusChecker").style.backgroundColor = "orange";
+			document.getElementById("statusChecker").innerHTML = "Ambulance Offline";
+		}
+		
 	}
     return response;
 }
@@ -40,18 +46,16 @@ function checkStatus() {
 	myHeaders.append('Content-Type', 'application/json'); 
 		fetch(`http://localhost:8080/status`, {
 		}).then(handleErrors)
-		.then(response => console.log("ok") )
+		.then()
 		.catch(function(error) {
 			document.getElementById("statusChecker").style.backgroundColor = "red";
-			document.getElementById("statusChecker").innerHTML = "OFFLINE";
+			document.getElementById("statusChecker").innerHTML = "Server Down";
 		});
 }
 
 
 // initMap is to initialise Googlemap
 function initMap() {
-    console.log(originLatitude)
-    console.log(originLongitude)
     const directionsRenderer = new google.maps.DirectionsRenderer();
     const directionsService = new google.maps.DirectionsService();
     const map = new google.maps.Map(document.getElementById("map"), {
@@ -78,8 +82,6 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer) {
 
 // Update Ambulance Location based upon ambulance selected
 function addLocationData(data3) {
-    console.log(data3[0][0]);
-    console.log(data3[0][1]);
     originLatitude =  data3[0][0];
     originLongitude = data3[0][1];
 }
@@ -105,10 +107,10 @@ function SelectAmbulance() {
 
     setTimeout(() => {  updateAmbulanceLocation(selectedAmbulance); }, 1000);;
     setTimeout(() => {  initMap(); }, 2000);
-	updateHeartRateData();
-	updateBloodPressureData();
-    updateSpO2();
-	checkStatus();
+	// updateHeartRateData();
+	// updateBloodPressureData();
+    // updateSpO2();
+	// checkStatus();
 }
 
 // Chart vaiables
@@ -139,7 +141,6 @@ window.onload = function() {
 			    enabled: true,
 			    snapToDataPoint: true
 		    },
-			minimum: 0
 	    },
 	    toolTip:{
 		    shared:true
@@ -182,7 +183,6 @@ window.onload = function() {
 			    enabled: true,
 			    snapToDataPoint: true
 		    },
-			minimum: 0
 	    },
 	    toolTip:{
 		    shared:true
@@ -287,16 +287,14 @@ function addBloodPressureData(data1) {
 }
 function addspo2Data(data2) {
 	spo2Info =  data2[0][0];
-	setTimeout(updateSpO2, 10000);
+	setTimeout(updateSpO2, 3000);
 	document.getElementById("spo2info").innerHTML = " &nbsp SpO2 : " + spo2Info;
 }
 
 function updateHeartRateData() {
-	checkStatus();
 	$.getJSON("http://localhost:8080/heartrate?xstart="+xValueHR+"&ambulanceID="+selectedAmbulance, addHeartRateData);
 }
 function updateBloodPressureData() {
-	checkStatus();
 	$.getJSON("http://localhost:8080/bloodpressure?xstart="+xValueBP+"&ambulanceID="+selectedAmbulance, addBloodPressureData);
 }
 function updateSpO2() {

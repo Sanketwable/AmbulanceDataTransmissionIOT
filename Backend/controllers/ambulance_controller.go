@@ -2,7 +2,7 @@ package controllers
 
 import (
 	"ambulancedatatransmissioniot/config"
-	"encoding/json"
+	"ambulancedatatransmissioniot/responses"
 	"fmt"
 	"net/http"
 	"strconv"
@@ -14,16 +14,9 @@ func GetambulanceLocation(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(ambulanceId)
 	var r1 [][]float64
 	row := []float64{config.Data.Ambulance[aid-1].Location.Latitude, config.Data.Ambulance[aid-1].Location.Longitude}
 	r1 = append(r1, row)
-	
-	w.Header().Add("Content-Type", "application/json; charset=utf-8")
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET")
-
-	json.NewEncoder(w).Encode(r1)
-	w.WriteHeader(100)
+	responses.JSON(w, 100, r1)
 
 }
