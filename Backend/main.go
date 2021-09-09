@@ -19,6 +19,7 @@ func main() {
 	r.HandleFunc("/spo2", controllers.Spo2Handler).Methods(http.MethodGet)
 	r.HandleFunc("/location", controllers.GetambulanceLocation).Methods(http.MethodGet)
 	r.HandleFunc("/update", config.UpdatedataHandler).Methods(http.MethodPost)
+	r.HandleFunc("/status", controllers.StatusHandler).Methods(http.MethodGet)
 	
 
 	http.ListenAndServe(":8080", r)

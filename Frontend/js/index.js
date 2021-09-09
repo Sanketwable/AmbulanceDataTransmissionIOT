@@ -10,6 +10,10 @@ var originLongitude = 74.621587;
 var destinationLatitude = 19.1178 
 var destinationLongitude = 74.7300
 
+//Graph Variable
+var heartRateChart
+var bloodpressureChart
+
 // Datapoints for Graph
 var HeartBeatPoints = [];
 var systolicBP = [];
@@ -18,7 +22,33 @@ var averageheartrate = [];
 var diastolicBP = [];
 var avgdiastolicBP = [];
 
+// HandleErrors
+function handleErrors(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+	else {
+		document.getElementById("statusChecker").style.backgroundColor = "green";
+		document.getElementById("statusChecker").innerHTML = "ONLINE";
+	}
+    return response;
+}
 
+// check online/offline status
+function checkStatus() {
+	let myHeaders = new Headers();
+	myHeaders.append('Content-Type', 'application/json'); 
+		fetch(`http://localhost:8080/status`, {
+		}).then(handleErrors)
+		.then(response => console.log("ok") )
+		.catch(function(error) {
+			document.getElementById("statusChecker").style.backgroundColor = "red";
+			document.getElementById("statusChecker").innerHTML = "OFFLINE";
+		});
+}
+
+
+// initMap is to initialise Googlemap
 function initMap() {
     console.log(originLatitude)
     console.log(originLongitude)
@@ -31,9 +61,9 @@ function initMap() {
     directionsRenderer.setMap(map);
     calculateAndDisplayRoute(directionsService, directionsRenderer);
 }
-  
-  function calculateAndDisplayRoute(directionsService, directionsRenderer) {
-    // const selectedMode = document.getElementById("mode").value;
+
+// calculateAndDisplayRoute is to calculate route in GMaps
+function calculateAndDisplayRoute(directionsService, directionsRenderer) {
     directionsService
       .route({
         origin: { lat: originLatitude, lng: originLongitude },
@@ -46,6 +76,7 @@ function initMap() {
       .catch((e) => window.alert("Directions request failed due to " + status));
 }
 
+// Update Ambulance Location based upon ambulance selected
 function addLocationData(data3) {
     console.log(data3[0][0]);
     console.log(data3[0][1]);
@@ -53,6 +84,7 @@ function addLocationData(data3) {
     originLongitude = data3[0][1];
 }
 
+// Get Request to server for getting latitude and longitude for ambulance
 function updateAmbulanceLocation(amb) {
     $.getJSON("http://localhost:8080/location?ambulanceID="+amb, addLocationData);
 }
@@ -62,17 +94,28 @@ function SelectAmbulance() {
     var e = document.getElementById("Ambulance");
     selectedAmbulance = e.options[e.selectedIndex].value;
 	document.getElementById("AmbulanceINFO").innerHTML = "Ambulance " + selectedAmbulance + " : " +AmbulanceInfo.get(parseInt(selectedAmbulance));
-    console.log(originLatitude)
-    console.log(originLongitude)
+    HeartBeatPoints.length = 0;
+	systolicBP.length = 0;
+	avgsystolicBP.length = 0;
+	averageheartrate.length = 0;
+	diastolicBP.length = 0;
+	avgdiastolicBP.length = 0;
+	xValueHR = 0;
+	xValueBP = 0;
+
     setTimeout(() => {  updateAmbulanceLocation(selectedAmbulance); }, 1000);;
     setTimeout(() => {  initMap(); }, 2000);
-	// updateHeartRateData();
-	// updateBloodPressureData();
+	updateHeartRateData();
+	updateBloodPressureData();
     updateSpO2();
+	checkStatus();
 }
 
+// Chart vaiables
 var heartRateChart
 var bloodpressureChart
+
+
 window.onload = function() {
 
     heartRateChart = new CanvasJS.Chart("heartRateMonitor", {
@@ -95,7 +138,8 @@ window.onload = function() {
 		    crosshair: {
 			    enabled: true,
 			    snapToDataPoint: true
-		    }
+		    },
+			minimum: 0
 	    },
 	    toolTip:{
 		    shared:true
@@ -137,7 +181,8 @@ window.onload = function() {
 		    crosshair: {
 			    enabled: true,
 			    snapToDataPoint: true
-		    }
+		    },
+			minimum: 0
 	    },
 	    toolTip:{
 		    shared:true
@@ -210,6 +255,7 @@ function addHeartRateData(data) {
 
 	setTimeout(updateHeartRateData, 2000);
 }
+
 function addBloodPressureData(data1) {
 	if(newDataCount1 != 1) {
 		$.each(data1, function(key, value) {
@@ -246,14 +292,15 @@ function addspo2Data(data2) {
 }
 
 function updateHeartRateData() {
+	checkStatus();
 	$.getJSON("http://localhost:8080/heartrate?xstart="+xValueHR+"&ambulanceID="+selectedAmbulance, addHeartRateData);
 }
 function updateBloodPressureData() {
+	checkStatus();
 	$.getJSON("http://localhost:8080/bloodpressure?xstart="+xValueBP+"&ambulanceID="+selectedAmbulance, addBloodPressureData);
 }
 function updateSpO2() {
+	checkStatus();
 	$.getJSON("http://localhost:8080/spo2?ambulanceID="+selectedAmbulance, addspo2Data);
 }
-
-
 

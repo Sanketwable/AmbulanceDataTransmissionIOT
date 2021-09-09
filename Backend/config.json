@@ -28,10 +28,10 @@
     "latitude": 19.176207,
     "longitude": 74.921587
    },
-   "heart_rate": 43,
-   "sys_bp": 590,
-   "dia_bp": 609,
-   "spo2": 12
+   "heart_rate": 434,
+   "sys_bp": 9,
+   "dia_bp": 69,
+   "spo2": 1200
   }
  ]
 }
