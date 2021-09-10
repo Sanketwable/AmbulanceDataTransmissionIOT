@@ -15,6 +15,15 @@
         "test",
         "code"
       ]
+    },
+    {
+      "login": "bhanu-1312",
+      "name": "Bhanu Pratap Singh",
+      "avatar_url": "https://avatars.githubusercontent.com/u/57167640?v=4",
+      "profile": "https://github.com/bhanu-1312",
+      "contributions": [
+        "infra"
+      ]
     }
   ],
   "contributorsPerLine": 7,
