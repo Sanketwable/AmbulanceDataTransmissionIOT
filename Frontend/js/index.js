@@ -107,16 +107,7 @@ function SelectAmbulance() {
 
     setTimeout(() => {  updateAmbulanceLocation(selectedAmbulance); }, 1000);;
     setTimeout(() => {  initMap(); }, 2000);
-	// updateHeartRateData();
-	// updateBloodPressureData();
-    // updateSpO2();
-	// checkStatus();
 }
-
-// Chart vaiables
-var heartRateChart
-var bloodpressureChart
-
 
 window.onload = function() {
 
@@ -136,7 +127,6 @@ window.onload = function() {
 	    },
         axisX: { 
 		    title: "Time",
-		    // suffix: " sec",
 		    crosshair: {
 			    enabled: true,
 			    snapToDataPoint: true
