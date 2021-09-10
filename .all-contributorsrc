@@ -24,6 +24,15 @@
       "contributions": [
         "infra"
       ]
+    },
+    {
+      "login": "Sachinwattamwar",
+      "name": "Sachin Wattamwar",
+      "avatar_url": "https://avatars.githubusercontent.com/u/43489632?v=4",
+      "profile": "https://github.com/Sachinwattamwar",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
