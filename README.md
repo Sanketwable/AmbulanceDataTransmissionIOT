@@ -1,6 +1,6 @@
 # AmbulanceDataTransmissionIOT
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 # Aim
 This Project aims to transfer real time critical informations of patient in an ambulance to the doctor.
@@ -30,6 +30,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <table>
   <tr>
     <td align="center"><a href="http://wablesanket.xyz"><img src="https://avatars.githubusercontent.com/u/43716242?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Wable Sanket</b></sub></a><br /><a href="#infra-Sanketwable" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="https://github.com/Sanketwable/AmbulanceDataTransmissionIOT/commits?author=Sanketwable" title="Tests">⚠️</a> <a href="https://github.com/Sanketwable/AmbulanceDataTransmissionIOT/commits?author=Sanketwable" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/bhanu-1312"><img src="https://avatars.githubusercontent.com/u/57167640?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Bhanu Pratap Singh</b></sub></a><br /><a href="#infra-bhanu-1312" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a></td>
   </tr>
 </table>
 
