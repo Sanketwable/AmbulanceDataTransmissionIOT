@@ -6,10 +6,10 @@
     "latitude": 19.106207,
     "longitude": 74.621587
    },
-   "heart_rate": 55,
-   "sys_bp": 135,
-   "dia_bp": 54,
-   "spo2": 91
+   "heart_rate": 53,
+   "sys_bp": 130,
+   "dia_bp": 49,
+   "spo2": 93
   },
   {
    "id": 2,
@@ -17,9 +17,9 @@
     "latitude": 19.126207,
     "longitude": 74.821587
    },
-   "heart_rate": 57,
-   "sys_bp": 136,
-   "dia_bp": 57,
+   "heart_rate": 52,
+   "sys_bp": 122,
+   "dia_bp": 55,
    "spo2": 91
   },
   {
@@ -28,10 +28,10 @@
     "latitude": 19.176207,
     "longitude": 74.921587
    },
-   "heart_rate": 59,
-   "sys_bp": 122,
-   "dia_bp": 62,
-   "spo2": 90
+   "heart_rate": 50,
+   "sys_bp": 148,
+   "dia_bp": 68,
+   "spo2": 97
   }
  ]
 }

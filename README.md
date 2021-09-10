@@ -20,6 +20,17 @@ It sends `heartbeatrate`, `bloodpressure`, `oxygen level` and `location of ambul
 * NodeMCU controller is used to send patient data to the server using JSON.
 * Server is built using Golang programming language which has inbuilt concurrency features to handle real time critical requests.
 
+# How to run
+````bash
+$ cd Backend
+$ go run main.go
+$ cd ..
+$ open -a 'google chrome' index.html
+````
+You should have NodeMCU or any *microcontroller* with WIFI
+upload code form `./Microcontroller` to *microcontroller*.
+
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
