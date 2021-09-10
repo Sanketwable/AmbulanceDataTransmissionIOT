@@ -136,7 +136,7 @@ window.onload = function() {
 	    },
         axisX: { 
 		    title: "Time",
-		    suffix: " sec",
+		    // suffix: " sec",
 		    crosshair: {
 			    enabled: true,
 			    snapToDataPoint: true
@@ -147,16 +147,18 @@ window.onload = function() {
 	    },  
 	    data: [{
 		    type: "line",
+			lineThickness: 5,
 		    showInLegend: true,
-		    name: "Bpm",
+		    name: "Avg Bpm",
 		    markerType: "circle",
+			markerSize: 0,
 		    color: "#F08080",
 		    dataPoints: HeartBeatPoints,
 	    },{
 		    type: "line",
 		    showInLegend: true,
             markerSize: 0,
-		    name: "average Bpm",
+		    name: "Normal Bpm",
 		    lineDashType: "dash",
 		    dataPoints: averageheartrate,
 	    }]
@@ -165,6 +167,7 @@ window.onload = function() {
 
     bloodpressureChart = new CanvasJS.Chart("bloodPressureMonitor", {
 	    theme: "light2",
+		height: 380,
         animationEnabled: true,
 	    title: {
 		    text: "BloodPressure Data"
@@ -178,7 +181,6 @@ window.onload = function() {
 	    },
         axisX: { 
 		    title: "Time",
-		    suffix: " sec",
 		    crosshair: {
 			    enabled: true,
 			    snapToDataPoint: true
@@ -189,6 +191,7 @@ window.onload = function() {
 	    }, 
 	    data: [{
 		    type: "line",
+			lineThickness: 3,
             showInLegend: true,
             markerType: "square",
             name: "Systolic",
@@ -196,22 +199,24 @@ window.onload = function() {
 		    dataPoints: systolicBP
 	    },{
 		    type: "line",
+			lineThickness: 3,
 		    showInLegend: true,
 		    name: "Diastolic",
 		    lineDashType: "line",
+			color: "#87CEEB",
 		    dataPoints: diastolicBP,
 	    },{
 		    type: "line",
 		    showInLegend: true,
             markerSize: 0,
-		    name: "average Systolic",
+		    name: "Normal Systolic",
 		    lineDashType: "dash",
 		    dataPoints: avgsystolicBP,
 	    },{
 		    type: "line",
 		    showInLegend: true,
             markerSize: 0,
-		    name: "average Diastolic",
+		    name: "Normal Diastolic",
 		    lineDashType: "dash",
 		    dataPoints: avgdiastolicBP,
 	    }]
@@ -253,7 +258,7 @@ function addHeartRateData(data) {
 	}
 	heartRateChart.render();
 
-	setTimeout(updateHeartRateData, 2000);
+	setTimeout(updateHeartRateData, 500);
 }
 
 function addBloodPressureData(data1) {

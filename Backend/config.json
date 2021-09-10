@@ -6,10 +6,10 @@
     "latitude": 19.106207,
     "longitude": 74.621587
    },
-   "heart_rate": 51,
-   "sys_bp": 140,
-   "dia_bp": 47,
-   "spo2": 94
+   "heart_rate": 57,
+   "sys_bp": 130,
+   "dia_bp": 41,
+   "spo2": 93
   },
   {
    "id": 2,
@@ -17,10 +17,10 @@
     "latitude": 19.126207,
     "longitude": 74.821587
    },
-   "heart_rate": 61,
-   "sys_bp": 143,
-   "dia_bp": 66,
-   "spo2": 98
+   "heart_rate": 56,
+   "sys_bp": 155,
+   "dia_bp": 57,
+   "spo2": 91
   },
   {
    "id": 3,
@@ -28,10 +28,10 @@
     "latitude": 19.176207,
     "longitude": 74.921587
    },
-   "heart_rate": 63,
-   "sys_bp": 167,
-   "dia_bp": 62,
-   "spo2": 94
+   "heart_rate": 53,
+   "sys_bp": 131,
+   "dia_bp": 60,
+   "spo2": 98
   }
  ]
 }
